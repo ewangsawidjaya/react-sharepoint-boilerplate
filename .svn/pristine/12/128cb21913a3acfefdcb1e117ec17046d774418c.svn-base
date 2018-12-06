@@ -1,0 +1,66 @@
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../../actions/index';
+
+import Navigation from '../common/navigation';
+import LoadingAnimation from '../common/loading-animation';
+import Home from './sections/home';
+
+import '../common/styles/assimilate-theme.scss';
+import './styles/application.scss';
+
+class Application extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount() {
+        this.props.initialize();
+    }
+
+    render() {
+        return (
+            <div className="Application assimilate-theme">
+                <React.Fragment>
+                    {this.props.initialized && !this.props.failed && (
+                        <div className="flex-container">
+                            <Home />
+                            <Navigation />
+                        </div>
+                    )}
+
+                    {this.props.failed && (
+                        <h2>
+                            Something went wrong. Please try again later. <span className="far fa-frown"></span>
+                        </h2>
+                    )}
+
+                    {this.props.initialized && this.props.restricted && (
+                        <h2>
+                            This page has been set to restricted access and you do not have permission to view it. <span className="far fa-frown"></span>
+                        </h2>
+                    )}
+                </React.Fragment>
+            </div>
+        )
+    }
+}
+
+/**
+ * Map dispatch to props
+ * @param dispatch
+ * @returns {*}
+ */
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(ActionCreators, dispatch);
+}
+
+/**
+ * List of available props from the application state
+ */
+export default connect((state) => { return {
+    initialized: state.initialized,
+    failed: state.failed,
+    restricted: state.restricted
+}}, mapDispatchToProps)(Application);

@@ -1,0 +1,58 @@
+import React from 'react';
+import './styles/navigation.scss';
+
+export default class Navigation extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            sections: []
+        }
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    /**
+     * What happens when a navigation item is clicked
+     * @param  {[type]} id [description]
+     * @return {[type]}    [description]
+     */
+    handleClick(id) {
+        document.getElementById(`${id}`).scrollIntoView({
+            behavior: 'smooth'
+        });
+    }
+
+    componentDidMount() {
+        let sections = document.getElementsByTagName('section');
+        let captured = [];
+        for(let i=0; i<sections.length; i++) {
+            if(sections[i].id !== '' && sections[i].dataset.title !== undefined) {
+                captured.push({
+                    id: sections[i].id,
+                    label: sections[i].dataset.title
+                });
+            }
+        }
+        this.setState({
+            sections: captured
+        });
+    }
+
+    render() {
+        return (
+            <div className="Navigation">
+                <label><span className="fa fa-bars"></span>Navigation</label>
+                <ul>
+                    {this.state.sections.map((el, i) => {
+                        return (
+                            <li key={i}>
+                                <a onClick={() => {this.handleClick(el.id)} }>
+                                    {el.label} <span className="fa fa-chevron-right"></span>
+                                </a>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </div>
+        )
+    }
+}

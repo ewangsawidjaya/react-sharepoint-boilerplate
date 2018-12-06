@@ -1,0 +1,35 @@
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { ActionCreators } from '../../../actions/index';
+import StyledContainer from '../../common/styled-container';
+
+class Home extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <StyledContainer className='Home' id='Home' title='Home'>
+                <h1>Welcome!</h1>
+            </StyledContainer>
+        )
+    }
+}
+
+/**
+ * Map dispatch to props
+ * @param dispatch
+ * @returns {*}
+ */
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(ActionCreators, dispatch);
+}
+
+/**
+ * List of available props from the application state
+ */
+export default connect((state) => { return {
+    restricted: state.restricted
+}}, mapDispatchToProps)(Home);

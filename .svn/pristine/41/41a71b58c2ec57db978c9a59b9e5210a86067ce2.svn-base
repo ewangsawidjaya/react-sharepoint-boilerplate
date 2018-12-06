@@ -1,0 +1,62 @@
+.Navigation {
+    position: -webkit-sticky;
+    position: relative;
+    margin-left: 15px;
+    background-color: white;
+    box-shadow: 0 2px 4px 0 rgba(50, 50, 93, 0.1);
+    border-top: 4px solid #85f2c5;
+    padding: 10px;
+    margin-bottom: 40px;
+    width: 286px;
+    min-width: 286px;
+
+    label {
+        font-weight: 600;
+        padding: 3px;
+        font-size: 14px;
+
+        .fa, .far {
+            margin-right: 8px;
+        }
+    }
+    
+    ul {
+        list-style: none;
+        position: sticky;
+        position: -webkit-sticky;
+        position: sticky;
+        padding-left: 20px;
+        top: 1rem;
+        padding: 0;
+
+        li {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+            a {
+                margin: 0px 0;
+                padding: 15px 5px;
+                cursor: pointer;
+                position: relative;
+                padding-right: 25px;
+                font-weight: 400;
+                font-style: italic;
+                display: block;
+                text-decoration: none;
+                color: #666;
+                
+                &:hover {
+                    background-color: #e4fff4;
+                }
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+            .fa {
+                position: absolute;
+                right: 10px;
+                top: calc(50% - 6px);
+            }
+        }
+    }
+}
